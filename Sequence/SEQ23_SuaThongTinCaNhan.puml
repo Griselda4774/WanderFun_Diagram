@@ -1,0 +1,45 @@
+@startuml SuaThongTinCaNhan
+
+title Sửa thông tin cá nhân
+
+skin rose
+scale 2
+hide footbox
+
+actor User as user
+boundary ": User Interface\nClass" as ui
+control ": User Controller\nClass" as uc
+control ": User Service\nClass" as us
+entity ": User\nClass" as u
+
+autonumber
+user++
+user -> ui++ : Ấn vào nút "Sửa" ở màn hình\nthông tin cá nhân
+ui -> user : Hiển thị form sửa thông tin cá nhân
+user -> ui : Sửa thông tin cá nhân\nvà ấn nút "Lưu"
+ui -> user : Gửi yêu cầu xác nhận hành động
+alt Người dùng không xác nhận
+    user --> ui : Ấn nút "Hủy"
+    ui --> user : Hủy thao tác và quay lại\nmàn hình thông tin cá nhân
+else Người dùng xác nhận
+    autonumber 5
+    user --> ui: Ấn nút "Xác nhận"
+    ui -> uc++ : Gửi yêu cầu sửa thông tin cá nhân
+    uc -> us++ : Điều hướng đến\nservice tương ứng
+    us -> us : Kiểm tra thông tin\nhợp lệ không
+    alt Thông tin không hợp lệ
+        us --> uc : Trả về thông báo\n thông tin không hợp lệ
+        uc --> ui : Trả về thông báo\n thông tin không hợp lệ
+        ui --> user : Hiển thị thông báo\n thông tin không hợp lệ
+    else Thông tin hợp lệ
+        autonumber 9
+        us -> u++ : Cập nhật thông tin cá nhân
+        u --> us-- : Trả về thông báo\n thành công
+        us --> uc-- : Trả về thông báo\n thành công
+        uc --> ui-- : Trả về thông báo\n thành công
+        ui --> user-- : Hiển thị thông báo thành công và chuyển đến\nmàn hình thông tin cá nhân
+    end
+end
+
+
+@enduml

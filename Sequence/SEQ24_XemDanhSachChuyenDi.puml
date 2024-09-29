@@ -1,0 +1,27 @@
+@startuml XemDanhSachChuyenDi
+
+title Xem danh sách chuyến đi
+
+skin rose
+scale 2
+hide footbox
+
+actor User as user
+boundary ": User Interface\nClass" as ui
+control ": Trip Controller\nClass" as tc
+control ": Trip Service\nClass" as ts
+entity ": Trip\nClass" as t
+
+autonumber
+user++
+user -> ui++ : Ấn vào tab "Chuyến đi"
+ui -> tc++ : Gửi yêu cầu lấy danh sách\nchuyến đi
+tc -> ts++ : Điều hướng đến service tương ứng
+ts -> t++ : Lấy danh sách\nchuyến đi
+t --> ts-- : Trả về danh sách\nchuyến đi
+ts --> tc-- : Trả về danh sách\nchuyến đi
+tc --> ui-- : Trả về danh sách\nchuyến đi
+ui --> user-- : Hiển thị danh sách\nchuyến đi
+user--
+
+@enduml

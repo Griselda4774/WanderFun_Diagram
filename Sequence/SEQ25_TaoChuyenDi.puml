@@ -1,0 +1,45 @@
+@startuml TaoChuyenDi
+
+title Tạo chuyến đi
+
+skin rose
+scale 2
+hide footbox
+
+actor User as user
+boundary ": User Interface\nClass" as ui
+control ": Trip Controller\nClass" as tc
+control ": Trip Service\nClass" as ts
+entity ": Trip\nClass" as t
+
+autonumber
+user++
+user -> ui++ : Ấn vào nút "Tạo chuyến đi"
+ui --> user : Hiển thị giao diện tạo chuyến đi
+user -> ui : Nhập thông tin chuyến đi\nvà ấn nút "Tạo"
+ui -> user : Gửi yêu cầu xác nhận hành động
+alt Người dùng không xác nhận
+    user --> ui : Ấn nút "Hủy"
+    ui --> user : Hủy thao tác và quay lại\ngiao diện danh sách chuyến đi
+else Người dùng xác nhận
+    autonumber 5
+    user --> ui: Ấn nút "Xác nhận"
+    ui -> tc++ : Gửi yêu cầu tạo chuyến đi
+    tc -> ts++ : Điều hướng đến\nservice tương ứng
+    ts -> ts : Kiểm tra thông tin\nhợp lệ không
+    alt Thông tin không hợp lệ
+        ts --> tc : Trả về thông báo\n thông tin không hợp lệ
+        tc --> ui : Trả về thông báo\n thông tin không hợp lệ
+        ui --> user : Hiển thị thông báo\n thông tin không hợp lệ
+    else Thông tin hợp lệ
+        autonumber 9
+        ts -> t++ : Tạo chuyến đi
+        t --> ts-- : Trả về thông báo\n thành công
+        ts --> tc-- : Trả về thông báo\n thành công
+        tc --> ui-- : Trả về thông báo\n thành công
+        ui --> user-- : Hiển thị thông báo thành công\nvà chuyển đến trang chính
+    end
+end
+user --
+
+@enduml
