@@ -1,0 +1,45 @@
+@startuml ManagePlaceUC
+
+left to right direction
+skin rose
+scale 2
+
+actor "User" as u
+actor "Admin" as a
+
+rectangle "Quản lí địa điểm du lịch" {
+    usecase "Xem danh sách địa điểm du lịch" as UC1
+    usecase "Xem thông tin địa điểm du lịch" as UC2
+    usecase "Thêm địa điểm du lịch" as UC3
+    usecase "Sửa thông tin địa điểm du lịch" as UC4
+    usecase "Xóa địa điểm du lịch" as UC5
+    usecase "Tìm kiếm địa điểm du lịch" as UC6
+    usecase "Đánh giá địa điểm du lịch" as UC7
+    usecase "Xem dưới dạng bản đồ" as UC8
+    usecase "Xem dưới dạng danh sách" as UC9
+    usecase "Thêm địa điểm vào mục yêu thích" as UC10
+    usecase "Xóa địa điểm khỏi mục yêu thích" as UC11
+    usecase "Xem danh sách địa điểm yêu thích" as UC12
+    usecase "Thêm địa điểm vào chuyến đi" as UC13
+}
+
+u -- UC2
+u -- UC6
+u -- UC7
+u -- UC8
+u -- UC10
+u -- UC11
+u -- UC12
+u -- UC13
+
+UC1 -- a
+UC2 -- a
+UC3 -- a
+UC4 -- a
+UC5 -- a
+UC6 -- a
+
+UC1 <.left. UC8 : <<extend>>
+UC1 <.right. UC9 : <<extend>>
+
+@enduml

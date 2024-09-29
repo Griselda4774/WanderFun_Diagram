@@ -1,0 +1,80 @@
+@startuml ClassDiagram
+
+skin rose
+scale 2
+hide circle
+
+class BaseUser {
+    # role: String
+    # email: String
+    # password: String
+    # firstName: String
+    # lastName: String
+}
+
+class Admin {
+
+}
+
+class Place {
+    - address: String
+    - name: String
+    - coverImageUrl: String
+    - description: String
+    - address: String
+    - history: String
+    - imageUrls: List<String>
+    - feedbacks: List<Feedback>
+}
+
+class User {
+    - avatarUrl: String
+    - dateOfBirth: Date
+    - gender: String
+    - phoneNumber: String
+    - favoritePlaces: List<Place>
+    - trips: List<Trip>
+    - albums: List<Album>
+}
+
+class Feedback {
+    - userId: String
+    - placeId: String
+    - rating: float
+    - comment: String
+    - timeArrived: Date
+}
+
+class Trip {
+    - userId: String
+    - startTime: Date
+    - endTime: Date
+    - tripPlaces: List<TripPlace>
+}
+
+class TripPlace {
+    - tripId: String
+    - placeId: String
+    - startTime: Date
+    - endTime: Date
+}
+
+class Album {
+    - userId: String
+    - name: String
+    - description: String
+    - placeId : String
+    - imageUrls: List<String>
+}
+
+BaseUser <|-left- Admin
+BaseUser <|-down- User
+Place "1" *-left- "0..*" Feedback : has >
+User "1" o-- "0..*" Feedback : manages >
+User "1" o-down- "0..*" Place : interested >
+User "1"*-right- "0..*" Trip : manages >
+Place "1" *-right- "0..*" TripPlace : has <
+Trip "1" *-down- "0..*" TripPlace : has >
+User "1" *-left- "0..*" Album : has >
+
+@enduml

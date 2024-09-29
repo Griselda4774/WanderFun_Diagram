@@ -1,0 +1,23 @@
+@startuml ManagePlanTripUC
+
+left to right direction
+skin rose
+scale 2
+
+actor "User" as u
+
+rectangle "Quản lí chuyến đi" {
+    usecase "Xem danh sách chuyến đi" as UC1
+    usecase "Tạo chuyến đi" as UC2
+    usecase "Xem thông tin chuyến đi" as UC3
+    usecase "Sửa chuyến đi" as UC4
+    usecase "Xóa chuyến đi" as UC5
+}
+
+u -- UC1
+u -- UC2
+u -- UC3
+u -- UC4
+u -- UC5
+
+@enduml

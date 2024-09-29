@@ -1,0 +1,19 @@
+@startuml ManageProfileUC
+
+left to right direction
+skin rose
+scale 2
+
+actor "User" as u
+
+rectangle "Quản lý hồ sơ cá nhân" {
+    usecase "Tạo hồ sơ cá nhân" as UC1
+    usecase "Xem thông tin cá nhân" as UC2
+    usecase "Sửa thông tin cá nhân" as UC3
+}
+
+u -- UC1
+u -- UC2
+u -- UC3
+
+@enduml

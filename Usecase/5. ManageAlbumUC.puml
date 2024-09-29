@@ -1,0 +1,28 @@
+@startuml ManageAlbumUC
+
+left to right direction
+skin rose
+scale 2
+
+actor "User" as u
+
+rectangle "Quản lí album du lịch" {
+    usecase "Xem danh sách album du lịch" as UC1
+    usecase "Tạo album du lịch" as UC2
+    usecase "Xem thông tin album du lịch" as UC3
+    usecase "Sửa album du lịch" as UC4
+    usecase "Xóa album du lịch" as UC5
+    usecase "Thêm ảnh vào album" as UC6
+    usecase "Xóa ảnh khỏi album" as UC7
+}
+
+u -- UC1
+u -- UC2
+u -- UC3
+u -- UC4
+u -- UC5
+
+UC6 <.left. UC4 : <<extend>>
+UC7 <.right. UC4 : <<extend>>
+
+@enduml

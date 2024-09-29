@@ -1,0 +1,44 @@
+@startuml GeneralUC
+
+left to right direction
+skin rose
+scale 2
+
+actor "User" as u
+actor "Admin" as a
+
+rectangle "WanderFun" {
+    usecase "Đăng nhập" as UC1
+    usecase "Đăng ký" as UC2
+    usecase "Tương tác bản đồ" as UC3
+    usecase "Quản lí địa điểm du lịch" as UC4
+    usecase "Quản lí hồ sơ cá nhân" as UC5
+    usecase "Quản lí chuyến đi" as UC6
+    usecase "Quản lí album du lịch" as UC7
+    usecase "Đăng xuất" as UC8
+    usecase "Quên mật khẩu" as UC9
+    usecase "Đổi mật khẩu" as UC10
+    usecase "Xóa tài khoản" as UC11
+    usecase "Xem bảng xếp hạng" as UC12
+    usecase "Check in điểm du lịch" as UC13
+}
+
+u -- UC1
+u -- UC2
+u -- UC3
+u -- UC4
+u -- UC5
+u -- UC6
+u -- UC7
+u -- UC8
+u -- UC9
+u -- UC10
+u -- UC11
+u -- UC12
+u -- UC13
+
+UC1 -- a
+UC3 -- a
+UC4 -- a
+UC8 -- a
+UC12 -- a
