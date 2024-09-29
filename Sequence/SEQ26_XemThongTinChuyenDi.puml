@@ -10,15 +10,27 @@ actor User as user
 boundary ": User Interface\nClass" as ui
 control ": Trip Controller\nClass" as tc
 control ": Trip Service\nClass" as ts
+control ": TripPlace Service\nClass" as tps
+control ": Place Service\nClass" as ps
 entity ": Trip\nClass" as t
+entity ": Place\nClass" as p
+entity ": TripPlace\nClass" as tp
 
 autonumber
 user++
 user -> ui++ : Ấn vào chuyến đi\ntrong danh sách chuyến đi
 ui -> tc++ : Gửi yêu cầu lấy thông tin\nchuyến đi
-tc -> ts++ : Điều hướng đến service tương ứng
+tc -> ts++ : Điều hướng đến\nservice tương ứng
 ts -> t++ : Lấy thông tin chuyến đi
 t --> ts-- : Trả về thông tin chuyến đi
+ts -> tps++ : Yêu cầu lấy thông tin\nTripPlace
+tps -> tp++ : Lấy thông tin TripPlace
+tp --> tps-- : Trả về thông tin TripPlace
+tps -> ps++ : Yêu cầu lấy thông tin\nđịa điểm
+ps -> p++ : Lấy thông tin địa điểm
+p --> ps-- : Trả về thông tin địa điểm
+ps --> tps-- : Trả về thông tin địa điểm
+tps --> ts-- : Trả về thông tin TripPlace
 ts --> tc-- : Trả về thông tin chuyến đi
 tc --> ui-- : Trả về thông tin chuyến đi
 ui --> user-- : Hiển thị thông tin chuyến đi
