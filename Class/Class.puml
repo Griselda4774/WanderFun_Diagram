@@ -23,6 +23,7 @@ class Place {
     - description: String
     - address: String
     - history: String
+    - score: int
     - imageUrls: List<String>
     - feedbacks: List<Feedback>
 }
@@ -32,6 +33,7 @@ class User {
     - dateOfBirth: Date
     - gender: String
     - phoneNumber: String
+    - score: int
     - favoritePlaces: List<Place>
     - trips: List<Trip>
     - albums: List<Album>
