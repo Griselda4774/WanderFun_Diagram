@@ -8,18 +8,24 @@
     hide footbox
 
     actor "User" as user
-    boundary "Log out Interface\nClass" as ui
-    control "Authentication Controller\nClass" as ctr
-    control "Authentication Service\nClass" as sv
+    boundary "User Interface\nClass" as ui
+    control "User Controller\nClass" as ctr
+    control "User Service\nClass" as sv
     entity "User \nClass" as ent
 
-    user -> ui: Truy cập vào màn hình \n "Cá nhân"
+    autonumber
+
+    user -> ui: Truy cập vào màn hình \n "Cá nhân" và chọn đăng xuất
     ui ++
     ui --> user: Hiện thông báo xác nhận đăng xuất
     alt Người dùng không xác \n nhận đăng xuất
         user -> ui: Nhấn hủy bỏ
         ui --> user: Đóng thông báo
     else Người dùng xác nhận đăng xuất
+
+        autonumber 3
+
+        user -> ui: Nhấn xác nhận đăng xuất
         ui -> ctr: Gửi yêu cầu đăng xuất
         ctr ++
         ctr -> sv: Gửi yêu cầu đăng xuất

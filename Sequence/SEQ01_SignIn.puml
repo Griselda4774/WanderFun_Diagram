@@ -6,10 +6,10 @@
     skinparam sequenceMessageAlign center
     hide footbox
 
-    actor "User" as user
-    boundary "Sign In Interface\nClass" as ui
-    control "Authentication Controller\nClass" as ctr
-    control "Authentication Service\nClass" as sv
+    actor "User/Admin" as user
+    boundary "User Interface\nClass" as ui
+    control "User Controller\nClass" as ctr
+    control "User Service\nClass" as sv
     entity "User \nClass" as ent
 
     autonumber

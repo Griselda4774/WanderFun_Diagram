@@ -1,0 +1,28 @@
+@startuml ReadPlace
+
+    title Xem thông tin địa điểm du lịch
+
+    skin rose
+    scale 2
+    skinparam sequenceMessageAlign center
+    hide footbox
+
+    actor "User/Admin" as user
+    boundary ": User Interface\nClass" as ui
+    control ": Place Controller\nClass" as uc
+    control ": Place Service\nClass" as us
+    entity ": Place\nClass" as u
+
+    autonumber
+    user++
+    user -> ui++ : Ấn vào địa điểm du lịch \n ở giao diện bản đồ 
+    ui -> uc++ : Gửi yêu cầu xem thông \n tin địa điểm du lịch
+    uc -> us++ : Điều hướng đến\nservice tương ứng
+    us -> u++ : Lấy thông tin địa điểm du lịch
+    u --> us-- : Trả về thông tin địa điểm du lịch
+    us --> uc-- : Trả về thông tin địa điểm du lịch
+    uc --> ui-- : Trả về thông tin địa điểm du lịch
+    ui --> user-- : Hiển thị thông tin địa điểm du lịch
+    user--
+
+@enduml
