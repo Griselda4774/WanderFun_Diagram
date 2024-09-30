@@ -1,0 +1,48 @@
+@startuml SEQ09_LeaderboardObserving
+    title: Check-in địa điểm du lịch
+
+    skin rose
+    scale 2
+    skinparam sequenceMessageAlign center
+    hide footbox
+
+    actor "User/Admin" as user
+    boundary "User Interface\nClass" as ui
+    control "User Controller \nClass" as uc
+    control "Place Controller\nClass" as pc
+    control "User Service\nClass" as us
+    control "Place Service\nClass" as ps
+    entity "User\nClass" as u
+    entity "Place\nClass" as p
+
+    autonumber
+
+    user -> ui++ : Ấn vào mục "Bảng xếp hạng"
+    alt Người dùng chọn xem \n bảng xếp hạng người dùng
+        ui -> uc : Gửi yêu cầu lấy bảng xếp hạng\n người dùng
+        uc ++
+        uc -> us : Điều hướng đến service tương ứng
+        us ++
+        us -> u : Lấy bảng xếp hạng\n người dùng
+        u ++
+        u --> us : Trả về bảng xếp hạng\n người dùng
+        u --
+        us --> uc : Trả về bảng xếp hạng\n người dùng
+        us --
+        uc --> ui : Trả về bảng xếp hạng\n người dùng
+        uc --
+        ui --> user : Hiển thị bảng xếp hạng\n người dùng
+    else Người dùng chọn xem \n bảng xếp hạng địa điểm
+
+        autonumber 2
+        ui -> pc++ : Gửi yêu cầu lấy bảng xếp hạng\n địa điểm
+        pc -> ps++ : Điều hướng đến\n service tương ứng
+        ps -> p++ : Lấy bảng xếp hạng\n địa điểm
+        p --> ps-- : Trả về bảng xếp hạng\n địa điểm
+        ps --> pc-- : Trả về bảng xếp hạng\n địa điểm
+        pc --> ui-- : Trả về bảng xếp hạng\n địa điểm
+        ui --> user : Hiển thị bảng xếp hạng\n địa điểm
+        ui --
+    end
+
+@enduml
