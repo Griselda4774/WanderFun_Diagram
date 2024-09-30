@@ -1,0 +1,45 @@
+@startuml TaoAlbumDuLich
+
+title Tạo album du lịch
+
+skin rose
+scale 2
+hide footbox
+
+actor User as user
+boundary ": User Interface\nClass" as ui
+control ": Album Controller\nClass" as abc
+control ": Album Service\nClass" as abs
+entity ": Album\nClass" as ab
+
+autonumber
+user++
+user -> ui++ : Ấn vào nút "Tạo album"
+ui -> user : Hiển thị màn hình tạo album
+user -> ui : Nhập thông tin album và ấn "Tạo"
+ui -> user : Gửi yêu cầu xác nhận hành động
+alt Người dùng không xác nhận
+    user --> ui : Ấn nút "Hủy"
+    ui --> user : Hủy thao tác
+else Người dùng xác nhận
+    autonumber 5
+    user --> ui: Ấn nút "Xác nhận"
+    ui -> abc++ : Gửi yêu cầu tạo album
+    abc -> abs++ : Điều hướng đến\nservice tương ứng
+    abs -> abs : Kiểm tra thông tin\nhợp lệ không
+    alt Thông tin không hợp lệ
+        abs --> abc : Trả về thông báo\n thông tin không hợp lệ
+        abc --> ui : Trả về thông báo\n thông tin không hợp lệ
+        ui --> user : Hiển thị thông báo\n thông tin không hợp lệ
+    else Thông tin hợp lệ
+        autonumber 9
+        abs -> ab++ : Tạo album
+        ab --> abs-- : Trả về thông báo\n thành công
+        abs --> abc-- : Trả về thông báo\n thành công
+        abc --> ui-- : Trả về thông báo\n thành công
+        ui --> user-- : Hiển thị thông báo thành công\nvà chuyển đến trang chính
+    end
+end
+user--
+
+@enduml
