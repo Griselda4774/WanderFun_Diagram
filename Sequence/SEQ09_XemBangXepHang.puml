@@ -1,5 +1,5 @@
-@startuml SEQ09_LeaderboardObserving
-    title: Check-in địa điểm du lịch
+@startuml SEQ09_XemBangXepHang
+    title: Xem bảng xếp hạng
 
     skin rose
     scale 2

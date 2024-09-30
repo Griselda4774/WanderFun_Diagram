@@ -1,4 +1,4 @@
-@startuml SEQ05_DeleteAccount
+@startuml SEQ05_XoaTaiKhoan
 
     title: Xóa tài khoản
 

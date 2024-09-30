@@ -1,4 +1,4 @@
-@startuml UpdatePlace
+@startuml SEQ13_SuaThongTinDiaDiemDuLich
 
     title Sửa thông tin địa điểm du lịch
 

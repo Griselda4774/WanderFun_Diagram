@@ -1,4 +1,4 @@
-@startuml SEQ03_forgetPassword
+@startuml SEQ03_QuenMatKhau
     title: Quên mật khẩu
 
     skin rose

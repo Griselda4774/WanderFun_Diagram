@@ -1,4 +1,4 @@
-@startuml RatingPlace
+@startuml SEQ16_DanhGiaDiaDiemDuLich
 
     title Đánh giá địa điểm du lịch
 

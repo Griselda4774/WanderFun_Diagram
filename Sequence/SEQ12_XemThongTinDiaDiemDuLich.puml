@@ -1,4 +1,4 @@
-@startuml ReadPlace
+@startuml SEQ12_XemThongTinDiaDiemDuLich
 
     title Xem thông tin địa điểm du lịch
 

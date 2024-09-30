@@ -1,4 +1,4 @@
-@startuml SEQ06_Logout
+@startuml SEQ06_DangXuat
 
     title: Đăng xuất
 

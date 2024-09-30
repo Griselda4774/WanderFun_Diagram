@@ -1,4 +1,5 @@
-@startuml SEQ02_signUp
+@startuml SEQ02_DangKy
+
     title: Đăng ký
 
     skin rose

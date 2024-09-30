@@ -1,4 +1,4 @@
-@startuml PlacesListRead
+@startuml SEQ10_XemDanhSachDiaDiemDuLich
 
 title Xem danh sách địa điểm du lịch
 

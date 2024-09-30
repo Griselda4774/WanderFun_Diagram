@@ -1,4 +1,4 @@
-@startuml SEQ07_MapInteract
+@startuml SEQ07_TuongTacBanDo
     title: Tương tác bản đồ
 
     skin rose

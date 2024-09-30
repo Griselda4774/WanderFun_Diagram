@@ -1,4 +1,4 @@
-@startuml SEQ04_changePassword
+@startuml SEQ04_DoiMatKhau
     title: Đổi mật khẩu
 
     skin rose

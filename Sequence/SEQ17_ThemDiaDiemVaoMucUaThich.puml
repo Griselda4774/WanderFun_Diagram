@@ -1,4 +1,4 @@
-@startuml AddFavoritePlace
+@startuml SEQ17_ThemDiaDiemVaoMucUaThich
 
     title Thêm địa điểm du lịch vào danh sách yêu thích
 

@@ -1,4 +1,4 @@
-@startuml SEQ07_CheckInPlace
+@startuml SEQ08_CheckInDiaDiemDuLich
     title: Check-in địa điểm du lịch
 
     skin rose

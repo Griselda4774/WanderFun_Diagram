@@ -1,4 +1,4 @@
-@startuml SEQ01_SignIn
+@startuml SEQ01_DangNhap
     title: Đăng nhập
 
     skin rose
