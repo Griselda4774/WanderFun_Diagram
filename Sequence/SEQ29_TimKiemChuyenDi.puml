@@ -1,0 +1,28 @@
+@startuml TimKiemChuyenDi
+
+title Tìm kiếm chuyến đi
+
+skin rose
+scale 2
+hide footbox
+
+actor User as user
+boundary ": User Interface\nClass" as ui
+control ": Trip Controller\nClass" as tc
+control ": Trip Service\nClass" as ts
+entity ": Trip\nClass" as t
+
+autonumber
+user++
+user -> ui++ : Nhập thông tin tìm kiếm\nvà ấn "Tìm kiếm"
+ui -> tc++ : Gửi yêu cầu tìm kiếm\nchuyến đi
+tc -> ts++ : Điều hướng đến\nservice tương ứng
+ts -> t++ : Tìm kiếm chuyến đi
+t --> ts-- : Trả về danh sách chuyến đi
+ts --> tc-- : Trả về danh sách chuyến đi
+tc --> ui-- : Trả về danh sách chuyến đi
+ui --> user-- : Hiển thị danh sách chuyến đi
+end
+user--
+
+@enduml

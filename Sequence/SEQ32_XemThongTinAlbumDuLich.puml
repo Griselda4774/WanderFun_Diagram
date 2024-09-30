@@ -1,0 +1,29 @@
+@startuml XemThongTinAlbumDuLich
+
+title Xem thông tin album du lịch
+
+skin rose
+scale 2
+hide footbox
+
+actor User as user
+boundary ": User Interface\nClass" as ui
+control ": Album Controller\nClass" as abc
+control ": Album Service\nClass" as abs
+entity ": Album\nClass" as ab
+
+autonumber
+user++
+user -> ui++ : Ấn vào album\ntrong danh sách album
+ui -> abc++ : Gửi yêu cầu lấy thông tin album
+abc -> abs++ : Điều hướng đến\nservice tương ứng
+abs -> ab++ : Lấy thông tin album
+ab --> abs-- : Trả về thông tin album
+abs --> abc-- : Trả về thông tin album
+abc --> ui-- : Trả về thông tin album
+ui --> user-- : Hiển thị thông tin album
+user--
+
+@enduml
+
+

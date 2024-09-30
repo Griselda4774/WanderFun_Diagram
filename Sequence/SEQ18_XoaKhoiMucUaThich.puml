@@ -1,0 +1,27 @@
+@startuml XoaKhoiMucUaThich
+
+title Xóa địa điểm khỏi mục ưa thích
+
+skin rose
+scale 2
+hide footbox
+
+actor User as user
+boundary ": User Interface\nClass" as ui
+control ": User Controller\nClass" as uc
+control ": User Service\nClass" as us
+entity ": User\nClass" as u
+
+autonumber
+user++
+user -> ui++ : Ấn vào nút trái tim đỏ\nở trang thông tin điểm du lịch
+ui -> uc++ : Gửi yêu cầu xóa điểm du lịch\nkhỏi mục ưa thích
+uc -> us++ : Điều hướng đến service tương ứng
+us -> u++ : Xóa điểm du lịch\nkhỏi mục ưa thích
+u --> us-- : Trả về thông báo thành công
+us --> uc-- : Trả về thông báo thành công
+uc --> ui-- : Trả về thông báo thành công
+ui --> user-- : Hiển thị thông báo thành công
+user --
+
+@enduml

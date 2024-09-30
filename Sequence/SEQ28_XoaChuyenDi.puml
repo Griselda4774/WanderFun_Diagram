@@ -1,0 +1,33 @@
+@startuml XoaChuyenDi
+
+title Xóa chuyến đi
+
+skin rose
+scale 2
+hide footbox
+
+actor User as user
+boundary ": User Interface\nClass" as ui
+control ": Trip Controller\nClass" as tc
+control ": Trip Service\nClass" as ts
+entity ": Trip\nClass" as t
+
+autonumber
+user++
+user -> ui++ : Ấn vào nút xóa ở màn hình\nthông tin chuyến đi
+ui -> user : Yêu cầu người dùng xác nhận
+alt Người dùng không xác nhận
+    user --> ui : Ấn "Hủy"
+    ui --> user : Hiển thị màn hình\nthông tin chuyến đi
+else Người dùng xác nhận
+    autonumber 5
+    user --> ui : Xác nhận
+    ui -> tc++ : Gửi yêu cầu xóa chuyến đi
+    tc -> ts++ : Điều hướng đến\nservice tương ứng
+    ts -> t++ : Xóa chuyến đi
+    t --> ts-- : Trả về thông báo thành công
+    ts --> tc-- : Trả về thông báo thành công
+    tc --> ui-- : Trả về thông báo thành công
+    ui --> user-- : Hiển thị thông báo thành công
+end
+

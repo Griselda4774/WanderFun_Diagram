@@ -1,0 +1,51 @@
+@startuml ThemDiaDiemVaoChuyenDi
+
+title Thêm địa điểm vào chuyến đi
+
+skin rose
+scale 2
+hide footbox
+
+actor User as user
+boundary ": User Interface\nClass" as ui
+control ": Trip Controller\nClass" as tc
+control ": Trip Service\nClass" as ts
+control ": TripPlace Service\nClass" as tps
+entity ": Trip\nClass" as t
+entity ": TripPlace\nClass" as tp
+
+autonumber
+user++
+user -> ui++ : Ấn vào nút "Thêm vào chuyến đi"\nở giao diện thông tin địa điểm
+ui --> user : Hiển thị danh sách chuyến đi\nvà form chọn thời gian ghé thăm
+user -> ui : Chọn chuyến đi và thời gian ghé thăm\n và sau đó ấn nút "Xác nhận"
+ui -> user : Gửi yêu cầu xác nhận hành động
+alt Người dùng không xác nhận
+    user --> ui : Ấn nút "Hủy"
+    ui --> user : Hủy thao tác và quay lại\ntrang thông tin địa điểm
+else Người dùng xác nhận
+    autonumber 5
+    user --> ui: Ấn nút "Xác nhận"
+    ui -> tc++ : Gửi yêu cầu thêm địa điểm\nvào chuyến đi
+    tc -> ts++ : Điều hướng đến\nservice tương ứng
+    ts -> ts : Kiểm tra thời gian\ncó hợp lệ không
+    alt Thời gian không hợp lệ
+        ts --> tc : Trả về thông báo\nthời gian không hợp lệ
+        tc --> ui : Trả về thông báo\nthời gian không hợp lệ
+        ui --> user : Hiển thị thông báo\nthời gian không hợp lệ
+    else Thời gian hợp lệ
+        autonumber 9
+        ts -> tps++ : Yêu cầu tạo TripPlace
+        tps -> tp++ : Tạo TripPlace
+        tp --> tps-- : Trả về TripPlace
+        tps --> ts-- : Trả về TripPlace
+        ts -> t++ : Thêm TripPlace vào Trip
+        t --> ts-- : Trả về thông báo\n thành công
+        ts --> tc-- : Trả về thông báo\n thành công
+        tc --> ui-- : Trả về thông báo\n thành công
+        ui --> user-- : Hiển thị thông báo\n thành công
+    end
+end
+user --
+
+@enduml

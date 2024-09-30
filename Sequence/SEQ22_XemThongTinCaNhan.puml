@@ -1,0 +1,27 @@
+@startuml XemThongTinCaNhan
+
+title Xem thông tin cá nhân
+
+skin rose
+scale 2
+hide footbox
+
+actor User as user
+boundary ": User Interface\nClass" as ui
+control ": User Controller\nClass" as uc
+control ": User Service\nClass" as us
+entity ": User\nClass" as u
+
+autonumber
+user++
+user -> ui++ : Ấn vào mục "Thông tin cá nhân"
+ui -> uc++ : Gửi yêu cầu xem thông tin cá nhân
+uc -> us++ : Điều hướng đến\nservice tương ứng
+us -> u++ : Lấy thông tin cá nhân
+u --> us-- : Trả về thông tin cá nhân
+us --> uc-- : Trả về thông tin cá nhân
+uc --> ui-- : Trả về thông tin cá nhân
+ui --> user-- : Hiển thị thông tin cá nhân
+user--
+
+@enduml
