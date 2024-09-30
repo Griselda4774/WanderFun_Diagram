@@ -1,0 +1,27 @@
+@startuml XemDanhSachAlbum
+
+title Xem danh sách album
+
+skin rose
+scale 2
+hide footbox
+
+actor User as user
+boundary ": User Interface\nClass" as ui
+control ": Album Controller\nClass" as abc
+control ": Album Service\nClass" as abs
+entity ": Album\nClass" as ab
+
+autonumber
+user++
+user -> ui++ : Ấn vào mục "Album của tôi"
+ui -> abc++ : Gửi yêu cầu lấy danh sách album
+abc -> abs++ : Điều hướng đến\nservice tương ứng
+abs -> ab++ : Lấy danh sách album
+ab --> abs-- : Trả về danh sách album
+abs --> abc-- : Trả về danh sách album
+abc --> ui-- : Trả về danh sách album
+ui --> user-- : Hiển thị danh sách album
+user--
+
+@enduml
