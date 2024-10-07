@@ -4,7 +4,6 @@ title Xem danh sách địa điểm du lịch
 
 skin rose
 scale 2
-skinparam sequenceMessageAlign center
 hide footbox
 
 actor "User/Admin" as user

@@ -4,28 +4,28 @@
 
     skin rose
     scale 2
-    skinparam sequenceMessageAlign center
     hide footbox
 
     actor "User" as user
-    boundary "User Interface\nClass" as ui
-    control "User Controller\nClass" as ctr
-    control "User Service\nClass" as sv
-    entity "User \nClass" as ent
+    boundary ": User Interface\nClass" as ui
+    control ": User Controller\nClass" as ctr
+    control ": User Service\nClass" as sv
+    entity ": User \nClass" as ent
 
     autonumber
 
-    user -> ui: Truy cập vào màn hình \n "Cá nhân" và chọn đăng xuất
+    user ++
+    user -> ui: Truy cập vào màn hình \n "Hồ sơ" và chọn đăng xuất
     ui ++
-    ui --> user: Hiện thông báo xác nhận đăng xuất
+    ui -> user: Hiện thông báo xác nhận đăng xuất
     alt Người dùng không xác \n nhận đăng xuất
-        user -> ui: Nhấn hủy bỏ
-        ui --> user: Đóng thông báo
+        user --> ui: Nhấn hủy bỏ
+        ui -> user: Đóng thông báo
     else Người dùng xác nhận đăng xuất
 
         autonumber 3
 
-        user -> ui: Nhấn xác nhận đăng xuất
+        user --> ui: Nhấn xác nhận đăng xuất
         ui -> ctr: Gửi yêu cầu đăng xuất
         ctr ++
         ctr -> sv: Gửi yêu cầu đăng xuất
@@ -40,4 +40,5 @@
         ctr--
         ui --> user: Hiển thị thông báo đăng xuất thành công\n và chuyển hướng đến trang đăng nhập
     end
+    user -- 
 @enduml

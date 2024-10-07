@@ -4,7 +4,6 @@
 
     skin rose
     scale 2
-    skinparam sequenceMessageAlign center
     hide footbox
 
     actor "User/Admin" as user

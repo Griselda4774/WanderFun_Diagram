@@ -4,7 +4,6 @@
 
     skin rose
     scale 2
-    skinparam sequenceMessageAlign center
     hide footbox
 
     actor User as user
@@ -15,6 +14,7 @@
 
     autonumber
 
+    user++
     user -> ui++ : Ấn vào xem thông tin \n địa điểm đã check-in
     ui --> user : Hiển thị thông tin chi tiết \n của địa điểm
     user -> ui : Người dùng cho điểm \n và để lại bình luận
@@ -28,5 +28,6 @@
     pc --> ui : Trả về kết quả
     pc --
     ui --> user : Hiển thị thông báo đánh giá thành công
+    user--
 
 @enduml
