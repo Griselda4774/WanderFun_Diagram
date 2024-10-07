@@ -14,26 +14,18 @@
 
     autonumber
     user++
-    user -> ui++ : Ấn vào nút "Thêm vào \n danh sách yêu thích"
-    ui -> user : Gửi yêu cầu xác nhận hành động
-    alt Người dùng không xác nhận
-        user --> ui : Ấn nút "Hủy"
-        ui --> user : Hủy thao tác
-    else Người dùng xác nhận
-        autonumber 3
-        user --> ui: Ấn nút "Xác nhận"
-        ui -> uc++ : Gửi yêu cầu thêm vào \n danh sách yêu thích
-        uc -> us++ : Điều hướng đến\nservice tương ứng
-        us -> u++ : Thêm địa điểm vào danh sách yêu thích
-        u --> us : Trả về kết quả
-        u --
-        us --> uc : Trả về kết quả
-        us --
-        uc --> ui : Trả về kết quả
-        uc --
-        ui --> user : Hiển thị thông báo thêm thành công
-        ui --
-    end
+    user -> ui++ : Ấn vào biểu tượng\n trái tim trắng
+    ui -> uc++ : Gửi yêu cầu thêm vào \n danh sách yêu thích
+    uc -> us++ : Điều hướng đến\nservice tương ứng
+    us -> u++ : Thêm địa điểm vào\n danh sách yêu thích
+    u --> us : Trả về kết quả
+    u --
+    us --> uc : Trả về kết quả
+    us --
+    uc --> ui : Trả về kết quả
+    uc --
+    ui --> user : Hiển thị thông báo\n thêm thành công
+    ui --
     user--
 
 @enduml
