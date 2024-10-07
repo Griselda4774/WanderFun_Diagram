@@ -3,19 +3,19 @@
 
     skin rose
     scale 2
-    skinparam sequenceMessageAlign center
     hide footbox
 
     actor "User" as user
-    boundary "User Interface\nClass" as ui
-    control "Map Controller\nClass" as ctr
-    control "Map Service\nClass" as mapSv
-    control "Place Service\nClass" as placeSv
-    entity "Place \nClass" as ent
+    boundary ": User Interface\nClass" as ui
+    control ": Map Controller\nClass" as ctr
+    control ": Map Service\nClass" as mapSv
+    control ": Place Service\nClass" as placeSv
+    entity ": Place \nClass" as ent
 
     autonumber
 
-    user -> ui: Truy cập vào ứng dụng \n(Mặc định người dùng có kết nối với internet)
+    user ++
+    user -> ui: Truy cập vào ứng dụng
     ui ++
     ui -> ctr: Gửi yêu cầu lấy dữ liệu bản đồ
     ctr ++
@@ -36,5 +36,5 @@
     ctr --
     ui --> user: Hiện màn hình chính của \n ứng dụng
     ui --
-    
+    user -- 
 @enduml

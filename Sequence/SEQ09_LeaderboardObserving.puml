@@ -3,20 +3,20 @@
 
     skin rose
     scale 2
-    skinparam sequenceMessageAlign center
     hide footbox
 
     actor "User/Admin" as user
-    boundary "User Interface\nClass" as ui
-    control "User Controller \nClass" as uc
-    control "Place Controller\nClass" as pc
-    control "User Service\nClass" as us
-    control "Place Service\nClass" as ps
-    entity "User\nClass" as u
-    entity "Place\nClass" as p
+    boundary ": User Interface\nClass" as ui
+    control ": User Controller \nClass" as uc
+    control ": Place Controller\nClass" as pc
+    control ": User Service\nClass" as us
+    control ": Place Service\nClass" as ps
+    entity ": User\nClass" as u
+    entity ": Place\nClass" as p
 
     autonumber
 
+    user ++
     user -> ui++ : Ấn vào mục "Bảng xếp hạng"
     alt Người dùng chọn xem \n bảng xếp hạng người dùng
         ui -> uc : Gửi yêu cầu lấy bảng xếp hạng\n người dùng
@@ -44,5 +44,6 @@
         ui --> user : Hiển thị bảng xếp hạng\n địa điểm
         ui --
     end
+    user --
 
 @enduml

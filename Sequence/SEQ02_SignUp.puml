@@ -3,17 +3,17 @@
 
     skin rose
     scale 2
-    skinparam sequenceMessageAlign center
     hide footbox
 
     actor "User" as user
-    boundary "User Interface\nClass" as ui
-    control "User Controller\nClass" as ctr
-    control "User Service\nClass" as sv
-    entity "User \nClass" as ent
+    boundary ": User Interface\nClass" as ui
+    control ": User Controller\nClass" as ctr
+    control ": User Service\nClass" as sv
+    entity ": User \nClass" as ent
 
     autonumber
 
+    user ++
     user -> ui: Truy cập màn hình đăng ký
     ui ++
     ui --> user: Hiện màn hình đăng ký tài khoản
@@ -26,17 +26,15 @@
     
     alt Thông tin đăng ký không hợp lệ (sai định dạng)
 
-        autonumber 5
-
         sv --> ctr: Trả về thông báo lỗi
         ctr --> ui: Trả về thông báo lỗi
         ui --> user: Hiển thị thông báo lỗi
 
     else Thông tin đăng ký hợp lệ
 
-        autonumber 5
+        autonumber 7
 
-        sv -> ent: Lưu thông tin đăng ký
+        sv -> ent: Kiểm tra thông tin đã tồn tại hay không
         ent ++
 
         alt Tài khoản không hợp lệ (đã tồn tại)
@@ -47,7 +45,7 @@
         
         else Tài khoản hợp lệ
 
-            autonumber 6
+            autonumber 8
 
             ent --> sv: Trả về thông tin tài khoản hợp lệ
             ent -- 
@@ -55,8 +53,9 @@
             sv --
             ctr --> ui: Trả về thông tin tài khoản hợp lệ
             ctr -- 
-            ui --> user: Hiển thị thông báo đăng ký thành công\nvà chuyển hướng đến trang chính
+            ui --> user: Hiển thị thông báo đăng ký thành công\nvà chuyển hướng đến trang tạo hồ sơ
             ui --
         end
     end
+    user --
 @enduml
