@@ -15,12 +15,12 @@
     autonumber
     ad++
     ad -> ui++ : Ấn vào nút "Sửa" ở màn hình\nthông tin địa điểm du lịch
-    ui -> ad : Hiển thị form sửa thông tin địa điểm du lịch
+    ui --> ad : Hiển thị form sửa thông tin địa điểm du lịch
     ad -> ui : Sửa thông tin địa điểm du lịch\nvà ấn nút "Lưu"
     ui -> ad : Gửi yêu cầu xác nhận hành động
     alt Người dùng không xác nhận
         ad --> ui : Ấn nút "Hủy"
-        ui --> ad : Hủy thao tác và quay lại\nmàn hình thông tin địa điểm du lịch
+        ui -> ad : Hủy thao tác
     else Người dùng xác nhận
         autonumber 5
         ad --> ui: Ấn nút "Xác nhận"
