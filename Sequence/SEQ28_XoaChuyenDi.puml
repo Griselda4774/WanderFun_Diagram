@@ -20,7 +20,7 @@ alt Người dùng không xác nhận
     user --> ui : Ấn "Hủy"
     ui --> user : Hiển thị màn hình\nthông tin chuyến đi
 else Người dùng xác nhận
-    autonumber 5
+    autonumber 3
     user --> ui : Xác nhận
     ui -> tc++ : Gửi yêu cầu xóa chuyến đi
     tc -> ts++ : Điều hướng đến\nservice tương ứng

@@ -52,12 +52,12 @@
         tripPlaceEnt ++
         tripPlaceEnt --> tripPlaceSv: Trả về thông báo xóa địa điểm thành công
         tripPlaceEnt --
-        tripPlaceSv -> tripEnt: Xóa chuyến đi của tài khoản
-        tripEnt ++
-        tripEnt --> tripPlaceSv: Trả về thông báo xóa chuyến đi thành công
-        tripEnt --
-        tripPlaceSv --> tripSv: Trả về thông báo xóa chuyến đi thành công
+        tripPlaceSv --> tripSv: Trả về thông báo xóa địa điểm thành công
         tripPlaceSv --
+        tripSv -> tripEnt: Xóa chuyến đi của tài khoản
+        tripEnt ++
+        tripEnt --> tripSv: Trả về thông báo xóa chuyến đi thành công
+        tripEnt --
         tripSv --> userSv: Trả về thông báo xóa chuyến đi thành công
         tripSv --
         userSv -> userEnt: Xóa tài khoản

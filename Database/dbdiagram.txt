@@ -1,0 +1,127 @@
+Table user {
+  id bigint PK
+  role varchar
+  email varchar
+  password varchar
+  firstName varchar
+  lastName varchar
+  isVerified bit
+  avatarUrl varchar
+  avatarPublicId varchar
+  dateOfBirth datetime
+  gender varchar
+  phoneNumber varchar
+  point int
+  isCreatedProfile bit
+}
+
+Table place {
+  id bigint PK
+  longitude double
+  latitude double
+  address varchar
+  name varchar
+  iconUrl varchar
+  iconPublicId varchar
+  coverImageUrl varchar
+  coverImagePublicId varchar
+  checkInPoint int
+  checkInRange float
+  category varchar
+  timeOpen time
+  timeClose time
+  alternativeName varchar
+  operator varchar
+  link varchar
+
+}
+
+Table place_image {
+  id bigint PK
+  imageUrl varchar
+  imagePublicId varchar
+  placeId bigint [ref: > place.id]
+}
+
+Table feedback {
+  id bigint PK
+  userName varchar
+  userAvatar varchar
+  rating float
+  comment varchar
+  time datetime
+  placeId bigint [ref: > place.id]
+}
+
+Table feedback_image {
+  id bigint PK
+  imageUrl varchar
+  imagePublicId varchar
+  fedbackId bigint [ref: > feedback.id]
+}
+
+Table favorite_place {
+  id bigint PK
+  placeId bigint
+  placeLatitude double
+  placeLongitude double
+  placeName varchar
+  placeCoverImageUrl varchar
+  userId bigint [ref: > user.id]
+}
+
+Table album {
+  id bigint PK
+  name varchar
+  description varchar
+  placeId bigint
+  placeLatitude double
+  placeLongitude double
+  placeName varchar
+  placeCoverImageUrl varchar
+  userId bigint [ref: > user.id]
+}
+
+Table album_image {
+  id bigint PK
+  imageUrl varchar
+  imagePublicId varchar
+  albumId bigint [ref: > album.id]
+}
+
+Table trip {
+  id bigint PK
+  name varchar
+  imageUrl varchar
+  imagePublicId varchar
+  startTime datetime
+  endTime datetime
+  userId bigint [ref: > user.id]
+}
+
+Table trip_place {
+  id bigint PK
+  placeId bigint
+  placeLatitude double
+  placeLongitude double
+  placeName varchar
+  placeCoverImageUrl varchar
+  startTime datetime
+  endTime datetime
+  tripId bigint [ref: > trip.id]
+}
+
+Table section {
+  id bigint PK
+  title varchar
+  content varchar
+  imageUrl varchar
+  imagePublicId varchar
+  placeId bigint [ref: > place.id]
+}
+
+Table refresh_token {
+  id bigint
+  token varchar
+  email varchar
+}

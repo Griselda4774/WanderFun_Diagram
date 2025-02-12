@@ -21,7 +21,7 @@
         ad --> ui : Ấn "Hủy"
         ui --> ad : Hiển thị màn hình\nthông tin địa điểm du lịch
     else quản trị viên xác nhận
-        autonumber 5
+        autonumber 3
         ad --> ui : Xác nhận
         ui -> tc++ : Gửi yêu cầu xóa địa điểm du lịch
         tc -> ts++ : Điều hướng đến\nservice tương ứng
