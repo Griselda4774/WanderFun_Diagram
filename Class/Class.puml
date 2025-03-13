@@ -4,77 +4,173 @@ skin rose
 scale 2
 hide circle
 
+class Album {
+    - id: Long
+    - name: String
+    - description: String
+    - placeId : String
+    - placeLongtitude: double
+    - placeLatitude: double
+    - placeName: String
+    - placeCoverImageUrl: String
+    - albumImages: List<AlbumImage>
+    - userId: Long
+}
+
+class AlbumImage {
+    - id: Long
+    - imageUrl: String
+    - imagePublicId: String
+    - albumId: Long
+}
+
 class BaseUser {
-    # role: String
+    # id: Long
+    # role: UserRole
     # email: String
     # password: String
     # firstName: String
     # lastName: String
+    # isVerified: boolean
 }
 
 class Admin {
 
 }
 
-class Place {
-    - address: String
-    - name: String
-    - coverImageUrl: String
-    - description: String
-    - address: String
-    - history: String
-    - imageUrls: List<String>
-    - feedbacks: List<Feedback>
-}
-
 class User {
     - avatarUrl: String
+    - avatarPublicId: String
     - dateOfBirth: Date
     - gender: String
     - phoneNumber: String
-    - favoritePlaces: List<Place>
+    - point: int
+    - isCreatedProfile: boolean
+    - favoritePlaces: List<FavouritePlace>
     - trips: List<Trip>
     - albums: List<Album>
 }
 
+class Place {
+    - id: Long
+    - longitude: double
+    - latitude: double
+    - address: String
+    - name: String
+    - iconUrl: String
+    - iconPublicId: String
+    - coverImageUrl: String
+    - coverImagePublicId: String
+    - description: List<Section>
+    - checkInPoint: int
+    - checkInRange: float
+    - category: PlaceCategory
+    - timeOpen: LocalTime
+    - timeClose: LocalTime
+    - alternativeName: String
+    - operator: String
+    - link: String
+    - placeImages: List<PlaceImage>
+    - feedbacks: List<Feedback>
+}
+
+class PlaceImage {
+    - id: Long
+    - imageUrl: String
+    - imagePublicId: String
+    - placeId: Long
+}
+
 class Feedback {
-    - userId: String
-    - placeId: String
+    - id: Long
+    - userName: String
+    - userAvatar: String
     - rating: float
     - comment: String
-    - timeArrived: Date
+    - feedbackImages: List<FeedbackImage>
+    - time: Date
+    - placeId: Long
+}
+
+class FeedbackImage {
+    - id: Long
+    - imageUrl: String
+    - imagePublicId: String
+    - feedbackId: Long
+}
+
+class Section {
+    - id: Long
+    - title: String
+    - content: String
+    - imageUrl: String
+    - imagePublicId: String
+    - placeId: Long
+}
+
+class FavouritePlace {
+    - id: Long
+    - placeId: Long
+    - userId: Long
+    - placeLongtitude: double
+    - placeLatitude: double
+    - placeName: String
+    - placeCoverImageUrl: String
 }
 
 class Trip {
-    - userId: String
+    - id: Long
+    - name: String
+    - imageUrl: String
+    - imagePublicId: String
     - startTime: Date
     - endTime: Date
     - tripPlaces: List<TripPlace>
+    - userId: Long
 }
 
 class TripPlace {
-    - tripId: String
-    - placeId: String
+    - id: Long
+    - placeLongtitude: double
+    - placeLatitude: double
+    - placeName: String
+    - placeCoverImageUrl: String
     - startTime: Date
     - endTime: Date
+    - tripId: Long
 }
 
-class Album {
-    - userId: String
-    - name: String
-    - description: String
-    - placeId : String
-    - imageUrls: List<String>
+enum UserRole {
+    ADMIN
+    USER
 }
 
-BaseUser <|-left- Admin
+enum PlaceCategory {
+    HOTEL
+    RESTAURANT
+    MUSEUM
+    PARK
+    SHOPPING
+    ENTERTAINMENT
+    OTHER
+}
+
+class RefreshToken {
+    - id: Long
+    - token: String
+    - email: String
+}
+
+BaseUser <|-right- Admin
 BaseUser <|-down- User
-Place "1" *-left- "0..*" Feedback : has >
-User "1" o-- "0..*" Feedback : manages >
-User "1" o-down- "0..*" Place : interested >
-User "1"*-right- "0..*" Trip : manages >
-Place "1" *-right- "0..*" TripPlace : has <
-Trip "1" *-down- "0..*" TripPlace : has >
-User "1" *-left- "0..*" Album : has >
+Place -left- Feedback
+Feedback -down- FeedbackImage
+User -down- Trip
+User -left- FavouritePlace
+Trip -left- TripPlace
+User -right- Album
+Album -down- AlbumImage
+Place -up- Section
+Place -down- PlaceImage
 
 @enduml

@@ -1,4 +1,4 @@
-@startuml TimKiemChuyenDi
+@startuml SEQ29_TimKiemChuyenDi
 
 title Tìm kiếm chuyến đi
 
@@ -22,7 +22,6 @@ t --> ts-- : Trả về danh sách chuyến đi
 ts --> tc-- : Trả về danh sách chuyến đi
 tc --> ui-- : Trả về danh sách chuyến đi
 ui --> user-- : Hiển thị danh sách chuyến đi
-end
 user--
 
 @enduml

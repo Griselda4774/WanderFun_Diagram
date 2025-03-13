@@ -1,0 +1,66 @@
+@startuml ClassConceptualDiagram
+
+skin rose
+scale 2
+hide circle
+
+class Album {}
+
+class AlbumImage {
+}
+
+class BaseUser {
+}
+
+class Admin {
+}
+
+class User {
+}
+
+class Place {
+}
+
+class PlaceImage {
+}
+
+class Feedback {
+}
+
+class FeedbackImage {
+}
+
+class Section {
+}
+
+class FavouritePlace {
+}
+
+class Trip {
+}
+
+class TripPlace {
+}
+
+class RefreshToken {
+}
+
+enum UserRole {
+}
+
+enum PlaceCategory {
+}
+
+BaseUser <|-right- Admin
+BaseUser <|-down- User
+Place -left- Feedback
+Feedback -down- FeedbackImage
+User -down- Trip
+User -left- FavouritePlace
+Trip -left- TripPlace
+User -right- Album
+Album -down- AlbumImage
+Place -up- Section
+Place -down- PlaceImage
+
+@enduml
