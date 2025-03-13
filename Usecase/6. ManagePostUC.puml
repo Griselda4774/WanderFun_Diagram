@@ -1,0 +1,32 @@
+@startuml ManagePostUC
+
+left to right direction
+skin rose
+scale 2
+
+actor "User" as u
+
+rectangle "Quản lí bài đăng" {
+    usecase "Xem danh sách bài đăng" as UC1
+    usecase "Tạo bài đăng" as UC2
+    usecase "Xem thông tin bài đăng" as UC3
+    usecase "Sửa bài đăng" as UC4
+    usecase "Xóa bài đăng" as UC5
+    usecase "Bình luận bài đăng" as UC6
+    usecase "Like bài đăng" as UC7
+    usecase "Xem danh sách bài đăng trong hệ thống" as UC8
+    usecase "Xem danh sách bài đăng của bản thân" as UC9
+}
+
+u -- UC1
+u -- UC2
+u -- UC3
+u -- UC4
+u -- UC5
+u -- UC6
+u -- UC7
+
+UC1 ..> UC8 : <<extends>>
+UC1 ..> UC9 : <<extends>>
+
+@enduml
