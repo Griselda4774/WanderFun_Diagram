@@ -51,6 +51,27 @@ enum UserRole {
 enum PlaceCategory {
 }
 
+class Province {
+}
+
+class District {
+}
+
+class Ward {
+}
+
+class Region {
+}
+
+class Unit {
+}
+
+class ProvinceDetail {
+}
+
+
+
+
 BaseUser <|-right- Admin
 BaseUser <|-down- User
 Place -left- Feedback
@@ -62,5 +83,21 @@ User -right- Album
 Album -down- AlbumImage
 Place -up- Section
 Place -down- PlaceImage
+
+PlaceCategory -- Place
+
+Province -- Unit
+Province -- Region
+
+District -- Unit
+District -- Province
+
+Ward -- Unit
+Ward -- District
+
+ProvinceDetail -- Province
+
+Place -- Ward
+
 
 @enduml
