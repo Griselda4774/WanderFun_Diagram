@@ -83,8 +83,7 @@ User -down- Comment
 User -up- CheckIn
 User -down- Like
 
-Album -left- AlbumImage
-Album -up- Place
+Album -up- AlbumImage
 
 Trip -right- TripPlace
 
@@ -92,27 +91,26 @@ Place -down- Feedback
 Place -up- Section
 Place -up- PlaceCategory
 Place -up- PlaceImage
-Place -left- Ward
-Place -down- FavouritePlace
-Place -down- CheckIn
-Place -down- TripPlace
+Place -right- Ward
+' Place -down- FavouritePlace
+' Place -down- CheckIn
+' Place -down- TripPlace
 
-Feedback -down- FeedbackImage
-Feedback -right- User
+Feedback -up- FeedbackImage
+' Feedback -down- User
 
-Province -up- Unit
-Province -up- Region
-Province -left- ProvinceDetail
+Province -- Unit
+Province -- Region
+Province -- ProvinceDetail
 
-District -up- Unit
-District -left- Province
+District -- Unit
+District -right- Province
 
-Ward -up- Unit
-Ward -left- District
+Ward -- Unit
+Ward -right- District
 
 Post -left- Comment
 Post -up- Like
-Post -up- Trip
 
 Comment -up- Like
 
