@@ -12,6 +12,7 @@ rectangle "Quản lí chuyến đi" {
     usecase "Xem thông tin chuyến đi" as UC3
     usecase "Sửa chuyến đi" as UC4
     usecase "Xóa chuyến đi" as UC5
+    usecase "Chia sẻ chuyến đi" as UC6
 }
 
 u -- UC1
@@ -19,5 +20,6 @@ u -- UC2
 u -- UC3
 u -- UC4
 u -- UC5
+u -- UC6
 
 @enduml

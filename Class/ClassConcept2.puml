@@ -1,0 +1,117 @@
+@startuml ClassConceptualDiagram
+
+skin rose
+scale 2
+
+class Album {}
+
+class AlbumImage {
+}
+
+class User {
+}
+
+class Place {
+}
+
+class PlaceImage {
+}
+
+class Feedback {
+}
+
+class FeedbackImage {
+}
+
+class Section {
+}
+
+class FavouritePlace {
+}
+
+class Trip {
+}
+
+class TripPlace {
+}
+
+class RefreshToken {
+}
+
+enum UserRole {
+}
+
+class PlaceCategory {
+}
+
+class Province {
+}
+
+class District {
+}
+
+class Ward {
+}
+
+class Region {
+}
+
+class Unit {
+}
+
+class ProvinceDetail {
+}
+
+class Post {
+}
+
+class Comment {
+}
+
+class Like {
+}
+
+class CheckIn {
+}
+
+User -right- Trip
+User -up- Album
+User -up- FavouritePlace
+User -left- RefreshToken
+User -down- Post
+User -down- Comment
+User -up- CheckIn
+User -down- Like
+
+Album -up- AlbumImage
+
+Trip -right- TripPlace
+
+Place -down- Feedback
+Place -up- Section
+Place -up- PlaceCategory
+Place -up- PlaceImage
+Place -right- Ward
+' Place -down- FavouritePlace
+' Place -down- CheckIn
+' Place -down- TripPlace
+
+Feedback -up- FeedbackImage
+' Feedback -down- User
+
+Province -- Unit
+Province -- Region
+Province -- ProvinceDetail
+
+District -- Unit
+District -right- Province
+
+Ward -- Unit
+Ward -right- District
+
+Post -left- Comment
+Post -up- Like
+
+Comment -up- Like
+
+@enduml

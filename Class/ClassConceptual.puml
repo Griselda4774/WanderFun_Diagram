@@ -2,18 +2,9 @@
 
 skin rose
 scale 2
-hide circle
 
 class Album {}
 
-class AlbumImage {
-}
-
-class BaseUser {
-}
-
-class Admin {
-}
 
 class User {
 }
@@ -21,13 +12,7 @@ class User {
 class Place {
 }
 
-class PlaceImage {
-}
-
 class Feedback {
-}
-
-class FeedbackImage {
 }
 
 class Section {
@@ -48,19 +33,91 @@ class RefreshToken {
 enum UserRole {
 }
 
-enum PlaceCategory {
+class PlaceCategory {
 }
 
-BaseUser <|-right- Admin
-BaseUser <|-down- User
-Place -left- Feedback
-Feedback -down- FeedbackImage
-User -down- Trip
-User -left- FavouritePlace
-Trip -left- TripPlace
-User -right- Album
-Album -down- AlbumImage
-Place -up- Section
-Place -down- PlaceImage
+class Province {
+}
+
+class District {
+}
+
+class Ward {
+}
+
+class AdministrativeRegion {
+}
+
+class AdministrativeUnit {
+}
+
+class ProvinceDetail {
+}
+
+class Post {
+}
+
+class Comment {
+}
+
+class Like {
+}
+
+class CheckIn {
+}
+
+User -right- Trip
+User -left- Album
+User -up- FavouritePlace
+User -down- RefreshToken
+User -down- Post
+User -down- Comment
+User -up- CheckIn
+User -down- Like
+User -up- UserRole
+
+' Album -left- AlbumImage
+' Album -up- Place
+
+Trip -right- TripPlace
+
+Place -down- Feedback
+Place -up- PlaceDetail
+Place -up- PlaceCategory
+' Place -up- PlaceImage
+Place -down- FavouritePlace
+Place -down- CheckIn
+Place -down- TripPlace
+
+PlaceDetail -right- Section
+
+
+' Feedback -up- FeedbackImage
+Feedback -right- User
+
+Province -up- AdministrativeUnit
+Province -up- AdministrativeRegion
+Province -left- ProvinceDetail
+
+District -up- AdministrativeUnit
+District -left- Province
+
+Ward -up- AdministrativeUnit
+Ward -left- District
+
+Post -down- Comment
+' Post -up- Like
+Post -up- Trip
+
+' Comment -up- Like
+
+Address -up- Province
+Address -up- District
+Address -up- Ward
+Address -down- AddressTargetType
+
+Image -up- ImageTargetType
+
+Like -up- LikeTargetType
 
 @enduml

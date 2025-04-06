@@ -1,0 +1,44 @@
+@startuml UpdatePlace
+
+    title Sửa thông tin địa điểm du lịch
+
+    skin rose
+    scale 2
+    hide footbox
+
+    actor Admin as ad
+    boundary ": User Interface\nClass" as ui
+    control ": Place Controller\nClass" as uc
+    control ": Place Service\nClass" as us
+    entity ": Place\nClass" as u
+
+    autonumber
+    ad++
+    ad -> ui++ : Ấn vào nút "Sửa" ở màn hình\nthông tin địa điểm du lịch
+    ui --> ad : Hiển thị form sửa thông tin địa điểm du lịch
+    ad -> ui : Sửa thông tin địa điểm du lịch\nvà ấn nút "Lưu"
+    ui -> ad : Gửi yêu cầu xác nhận hành động
+    alt Người dùng không xác nhận
+        ad --> ui : Ấn nút "Hủy"
+        ui -> ad : Hủy thao tác
+    else Người dùng xác nhận
+        autonumber 5
+        ad --> ui: Ấn nút "Xác nhận"
+        ui -> uc++ : Gửi yêu cầu sửa thông tin địa điểm du lịch
+        uc -> us++ : Điều hướng đến\nservice tương ứng
+        us -> us : Kiểm tra thông tin\nhợp lệ không
+        alt Thông tin không hợp lệ
+            us --> uc : Trả về thông báo\n thông tin không hợp lệ
+            uc --> ui : Trả về thông báo\n thông tin không hợp lệ
+            ui --> ad : Hiển thị thông báo\n thông tin không hợp lệ
+        else Thông tin hợp lệ
+            autonumber 9
+            us -> u++ : Cập nhật thông tin địa điểm du lịch
+            u --> us-- : Trả về thông báo\n thành công
+            us --> uc-- : Trả về thông báo\n thành công
+            uc --> ui-- : Trả về thông báo\n thành công
+            ui --> ad-- : Hiển thị thông báo thành công và chuyển đến\nmàn hình thông tin địa điểm du lịch
+        end
+    end
+
+@enduml

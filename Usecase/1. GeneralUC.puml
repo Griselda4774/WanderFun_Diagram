@@ -21,6 +21,7 @@ rectangle "WanderFun" {
     usecase "Xóa tài khoản" as UC11
     usecase "Xem bảng xếp hạng" as UC12
     usecase "Check in điểm du lịch" as UC13
+    usecase "Quản lí bài đăng" as UC14
 }
 
 u -- UC1
@@ -36,6 +37,7 @@ u -- UC10
 u -- UC11
 u -- UC12
 u -- UC13
+u -- UC14
 
 UC1 -- a
 UC3 -- a
