@@ -3,24 +3,112 @@
 skin rose
 scale 2
 
+class AdministrativeRegion {
+    id: Long
+    name: String
+    nameEn: String
+    codeName: String
+    codeNameEn: String
+
+}
+
+class AdministrativeUnit {
+    id: Long
+    fullName: String
+    fullNameEn: String
+    shortName: String
+    shortNameEn: String
+    codeName: String
+    codeNameEn: String
+}
+
+class Province {
+    - code: String
+    - name: String
+    - nameEn: String
+    - fullName: String
+    - fullNameEn: String
+    - codeName: String
+    - regionId: Long
+    - unitId: Long
+}
+
+class District {
+    - code: String
+    - name: String
+    - nameEn: String
+    - fullName: String
+    - fullNameEn: String
+    - codeName: String
+    - unitId: Long
+    - provinceCode: String
+}
+
+class Ward {
+    - code: String
+    - name: String
+    - nameEn: String
+    - fullName: String
+    - fullNameEn: String
+    - codeName: String
+    - unitId: Long
+    - districtCode: String
+}
+
+class ProvinceDetail {
+    - provinceCode: String
+    - longitude: double
+    - latitude: double
+    - area_km2: double
+    - description: String
+    - bestTimeToVisit: String
+    - festivals: String
+    - localTransport: String
+    - localFood: String
+    - howToGetThere: String
+}
+
+class Address {
+    - id: Long
+    - province: Province
+    - district: District
+    - ward: Ward
+    - street: String
+    - targetType: AddressTargetType
+    - targetId: Long
+}
+
+enum AddressTargetType {
+    USER,
+    PLACE,
+}
+
+class Image {
+    - id: Long
+    - imageUrl: String
+    - imagePublicId: String
+    - targetType: ImageType
+    - targetId: Long
+}
+
+enum ImageTargetType {
+    ALBUM,
+    PLACE_IMAGE,
+    PLACE_ICON,
+    PLACE_COVER,
+    FEEDBACK,
+    POST,
+    USER_AVATAR,
+    SECTION,
+}
+
 class Album {
     - id: Long
     - name: String
     - description: String
-    - placeId : String
-    - placeLongtitude: double
-    - placeLatitude: double
-    - placeName: String
-    - placeCoverImageUrl: String
-    - albumImages: List<AlbumImage>
+    - updatedAt: LocalTime
+    - place: Place
     - userId: Long
-}
-
-class AlbumImage {
-    - id: Long
-    - imageUrl: String
-    - imagePublicId: String
-    - albumId: Long
 }
 
 class User {
@@ -31,103 +119,86 @@ class User {
     - firstName: String
     - lastName: String
     - isVerified: boolean
-    - avatarUrl: String
-    - avatarPublicId: String
+    - isCreatedProfile: boolean
+    - avatarImage: Image
     - dateOfBirth: Date
     - gender: String
     - phoneNumber: String
     - point: int
-    - isCreatedProfile: boolean
-    - favoritePlaces: List<FavouritePlace>
+    - address: Address
+    - listFavoritePlaces: List<FavouritePlace>
 }
 
 class Place {
     - id: Long
     - longitude: double
     - latitude: double
-    - address: String
+    - address: Address
     - name: String
-    - iconUrl: String
-    - iconPublicId: String
-    - coverImageUrl: String
-    - coverImagePublicId: String
-    - description: List<Section>
+    - iconImage: Image
+    - coverImage: Image
+    - placeDetail: PlaceDetail
+}
+
+class PlaceDetail {
+    - id: Long
+    - description: String
     - checkInPoint: int
     - checkInRange: float
     - category: PlaceCategory
     - timeOpen: LocalTime
     - timeClose: LocalTime
+    - isOpen: boolean
+    - bestTimeToVisit: String
+    - priceRangeTop: int
+    - priceRangeBottom: int
+    - isVerified: boolean
     - alternativeName: String
     - operator: String
     - link: String
-    - placeImages: List<PlaceImage>
-    - feedbacks: List<Feedback>
-}
-
-class PlaceImage {
-    - id: Long
-    - imageUrl: String
-    - imagePublicId: String
-    - placeId: Long
+    - rating: float
+    - totalRating: int
+    - totalFeedback: int
 }
 
 class Feedback {
     - id: Long
-    - userName: String
-    - userAvatar: String
+    - user: User
     - rating: float
     - comment: String
-    - feedbackImages: List<FeedbackImage>
-    - time: Date
-    - placeId: Long
-}
-
-class FeedbackImage {
-    - id: Long
-    - imageUrl: String
-    - imagePublicId: String
-    - feedbackId: Long
+    - createAt: LocalTime
+    - placeDetailId: Long
 }
 
 class Section {
     - id: Long
     - title: String
     - content: String
-    - imageUrl: String
-    - imagePublicId: String
-    - placeId: Long
+    - image: Image
+    - placeDetailId: Long
 }
 
 class FavouritePlace {
     - id: Long
     - placeId: Long
     - userId: Long
-    - placeLongtitude: double
-    - placeLatitude: double
-    - placeName: String
-    - placeCoverImageUrl: String
 }
 
 class Trip {
     - id: Long
     - name: String
-    - imageUrl: String
-    - imagePublicId: String
     - startTime: Date
     - endTime: Date
-    - tripPlaces: List<TripPlace>
-    - userId: Long
+    - authorId: Long
+    - listTripPlaces: List<TripPlace>
 }
 
 class TripPlace {
     - id: Long
-    - placeLongtitude: double
-    - placeLatitude: double
-    - placeName: String
-    - placeCoverImageUrl: String
+    - place: Place
+    - tripId: Long
     - startTime: Date
     - endTime: Date
-    - tripId: Long
 }
 
 enum UserRole {
@@ -148,49 +219,100 @@ enum PlaceCategory {
 class RefreshToken {
     - id: Long
     - token: String
-    - email: String
+    - userId: Long
+}
+
+class Post {
+    - id: Long
+    - user: User
+    - content: String
+    - createAt: LocalTime
+    - isTripShare: boolean
+    - trip: Trip
+    - like: int
+}
+
+class Comment {
+    - id: Long
+    - user: User
+    - content: String
+    - createAt: LocalTime
+    - postId: Long
+    - parentId: Long
+    - like: int
+}
+
+class Like {
+    - id: Long
+    - user: User
+    - targetId: Long
+    - targetType: LikeTargetType
+}
+
+enum LikeTargetType {
+    POST,
+    COMMENT,
+}
+
+class CheckIn {
+    - id: Long
+    - userId: Long
+    - place: Place
+    - checkInTime: LocalTime
 }
 
 User -right- Trip
-User -up- Album
+User -left- Album
 User -up- FavouritePlace
-User -left- RefreshToken
+User -down- RefreshToken
 User -down- Post
 User -down- Comment
 User -up- CheckIn
 User -down- Like
+User -up- UserRole
 
-Album -left- AlbumImage
-Album -up- Place
+' Album -left- AlbumImage
+' Album -up- Place
 
 Trip -right- TripPlace
 
 Place -down- Feedback
-Place -up- Section
+Place -up- PlaceDetail
 Place -up- PlaceCategory
-Place -up- PlaceImage
-Place -left- Ward
+' Place -up- PlaceImage
 Place -down- FavouritePlace
 Place -down- CheckIn
 Place -down- TripPlace
 
-Feedback -down- FeedbackImage
+PlaceDetail -right- Section
+
+
+' Feedback -up- FeedbackImage
 Feedback -right- User
 
-Province -up- Unit
-Province -up- Region
+Province -up- AdministrativeUnit
+Province -up- AdministrativeRegion
 Province -left- ProvinceDetail
 
-District -up- Unit
+District -up- AdministrativeUnit
 District -left- Province
 
-Ward -up- Unit
+Ward -up- AdministrativeUnit
 Ward -left- District
 
-Post -left- Comment
-Post -up- Like
+Post -down- Comment
+' Post -up- Like
 Post -up- Trip
 
-Comment -up- Like
+' Comment -up- Like
+
+Address -up- Province
+Address -up- District
+Address -up- Ward
+Address -down- AddressTargetType
+
+Image -up- ImageTargetType
+
+Like -up- LikeTargetType
 
 @enduml

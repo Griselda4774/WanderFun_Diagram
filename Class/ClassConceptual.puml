@@ -5,8 +5,6 @@ scale 2
 
 class Album {}
 
-class AlbumImage {
-}
 
 class User {
 }
@@ -14,13 +12,7 @@ class User {
 class Place {
 }
 
-class PlaceImage {
-}
-
 class Feedback {
-}
-
-class FeedbackImage {
 }
 
 class Section {
@@ -53,10 +45,10 @@ class District {
 class Ward {
 }
 
-class Region {
+class AdministrativeRegion {
 }
 
-class Unit {
+class AdministrativeUnit {
 }
 
 class ProvinceDetail {
@@ -75,45 +67,57 @@ class CheckIn {
 }
 
 User -right- Trip
-User -up- Album
+User -left- Album
 User -up- FavouritePlace
-User -left- RefreshToken
+User -down- RefreshToken
 User -down- Post
 User -down- Comment
 User -up- CheckIn
 User -down- Like
+User -up- UserRole
 
-Album -left- AlbumImage
-Album -up- Place
+' Album -left- AlbumImage
+' Album -up- Place
 
 Trip -right- TripPlace
 
 Place -down- Feedback
-Place -up- Section
+Place -up- PlaceDetail
 Place -up- PlaceCategory
-Place -up- PlaceImage
-Place -left- Ward
+' Place -up- PlaceImage
 Place -down- FavouritePlace
 Place -down- CheckIn
 Place -down- TripPlace
 
-Feedback -down- FeedbackImage
+PlaceDetail -right- Section
+
+
+' Feedback -up- FeedbackImage
 Feedback -right- User
 
-Province -up- Unit
-Province -up- Region
+Province -up- AdministrativeUnit
+Province -up- AdministrativeRegion
 Province -left- ProvinceDetail
 
-District -up- Unit
+District -up- AdministrativeUnit
 District -left- Province
 
-Ward -up- Unit
+Ward -up- AdministrativeUnit
 Ward -left- District
 
-Post -left- Comment
-Post -up- Like
+Post -down- Comment
+' Post -up- Like
 Post -up- Trip
 
-Comment -up- Like
+' Comment -up- Like
+
+Address -up- Province
+Address -up- District
+Address -up- Ward
+Address -down- AddressTargetType
+
+Image -up- ImageTargetType
+
+Like -up- LikeTargetType
 
 @enduml
