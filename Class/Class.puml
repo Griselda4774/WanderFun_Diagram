@@ -4,7 +4,7 @@ skin rose
 scale 2
 
 class AdministrativeRegion {
-    id: Long
+    id: Integer
     name: String
     nameEn: String
     codeName: String
@@ -13,7 +13,7 @@ class AdministrativeRegion {
 }
 
 class AdministrativeUnit {
-    id: Long
+    id: Integer
     fullName: String
     fullNameEn: String
     shortName: String
@@ -94,7 +94,7 @@ class Image {
 enum ImageTargetType {
     ALBUM,
     PLACE_IMAGE,
-    PLACE_ICON,
+    CATEGORY_ICON,
     PLACE_COVER,
     FEEDBACK,
     POST,
@@ -106,19 +106,33 @@ class Album {
     - id: Long
     - name: String
     - description: String
+    - createAt: LocalTime
     - updatedAt: LocalTime
     - place: Place
     - userId: Long
 }
 
-class User {
+class Account {
     - id: Long
     - role: UserRole
     - email: String
     - password: String
+    - isVerified: boolean
+    - isActive: boolean
+    - isDeleted: boolean
+    - createdAt: LocalTime
+}
+
+class RefreshToken {
+    - id: Long
+    - token: String
+    - accountId: Long
+}
+
+class User {
+    - id: Long
     - firstName: String
     - lastName: String
-    - isVerified: boolean
     - isCreatedProfile: boolean
     - avatarImage: Image
     - dateOfBirth: Date
@@ -126,7 +140,25 @@ class User {
     - phoneNumber: String
     - point: int
     - address: Address
-    - listFavoritePlaces: List<FavouritePlace>
+    - accountId: Long
+    - createAt: LocalTime
+}
+
+enum UserRole {
+    ADMIN
+    USER
+}
+
+class CheckIn {
+    - id: Long
+    - userId: Long
+    - place: Place
+    - checkInTime: LocalTime
+}
+
+class FavouritePlace {
+    - placeId: Long
+    - userId: Long
 }
 
 class Place {
@@ -135,39 +167,37 @@ class Place {
     - latitude: double
     - address: Address
     - name: String
-    - iconImage: Image
+    - category: PlaceCategory
     - coverImage: Image
-    - placeDetail: PlaceDetail
+    - rating: float
+    - totalRating: int
+    - totalFeedback: int
 }
 
 class PlaceDetail {
-    - id: Long
+    - placeId: Long
     - description: String
     - checkInPoint: int
-    - checkInRange: float
-    - category: PlaceCategory
+    - checkInRangeMeter: float
     - timeOpen: LocalTime
     - timeClose: LocalTime
-    - isOpen: boolean
+    - isClosed: boolean
     - bestTimeToVisit: String
     - priceRangeTop: int
     - priceRangeBottom: int
     - isVerified: boolean
     - alternativeName: String
     - operator: String
-    - link: String
-    - rating: float
-    - totalRating: int
-    - totalFeedback: int
+    - url: String
 }
 
 class Feedback {
-    - id: Long
+    - placeDetailId: Long
     - user: User
     - rating: float
-    - comment: String
+    - content: String
     - createAt: LocalTime
-    - placeDetailId: Long
+    - updateAt: LocalTime
 }
 
 class Section {
@@ -178,10 +208,11 @@ class Section {
     - placeDetailId: Long
 }
 
-class FavouritePlace {
-    - id: Long
-    - placeId: Long
-    - userId: Long
+class PlaceCategory {
+    - id: Integer
+    - name: String
+    - nameEn: String
+    - iconImage: Image
 }
 
 class Trip {
@@ -189,7 +220,7 @@ class Trip {
     - name: String
     - startTime: Date
     - endTime: Date
-    - authorId: Long
+    - userId: Long
     - listTripPlaces: List<TripPlace>
 }
 
@@ -199,27 +230,7 @@ class TripPlace {
     - tripId: Long
     - startTime: Date
     - endTime: Date
-}
-
-enum UserRole {
-    ADMIN
-    USER
-}
-
-enum PlaceCategory {
-    HOTEL
-    RESTAURANT
-    MUSEUM
-    PARK
-    SHOPPING
-    ENTERTAINMENT
-    OTHER
-}
-
-class RefreshToken {
-    - id: Long
-    - token: String
-    - userId: Long
+    - placeNote: String
 }
 
 class Post {
@@ -227,6 +238,8 @@ class Post {
     - user: User
     - content: String
     - createAt: LocalTime
+    - updateAt: LocalTime
+    - place: Place
     - isTripShare: boolean
     - trip: Trip
     - like: int
@@ -237,6 +250,7 @@ class Comment {
     - user: User
     - content: String
     - createAt: LocalTime
+    - updateAt: LocalTime
     - postId: Long
     - parentId: Long
     - like: int
@@ -254,41 +268,31 @@ enum LikeTargetType {
     COMMENT,
 }
 
-class CheckIn {
-    - id: Long
-    - userId: Long
-    - place: Place
-    - checkInTime: LocalTime
-}
-
-User -right- Trip
-User -left- Album
+User -up- Trip
+User -up- Album
 User -up- FavouritePlace
 User -down- RefreshToken
-User -down- Post
-User -down- Comment
+User -right- Post
+User -right- Comment
 User -up- CheckIn
 User -down- Like
-User -up- UserRole
+User -left- UserRole
+User -down- Account
 
-' Album -left- AlbumImage
-' Album -up- Place
-
-Trip -right- TripPlace
+Trip -up- TripPlace
 
 Place -down- Feedback
 Place -up- PlaceDetail
 Place -up- PlaceCategory
-' Place -up- PlaceImage
 Place -down- FavouritePlace
 Place -down- CheckIn
 Place -down- TripPlace
+Place -down- Album
+Place -down- Post
 
 PlaceDetail -right- Section
 
-
-' Feedback -up- FeedbackImage
-Feedback -right- User
+Feedback -down- User
 
 Province -up- AdministrativeUnit
 Province -up- AdministrativeRegion
@@ -301,10 +305,7 @@ Ward -up- AdministrativeUnit
 Ward -left- District
 
 Post -down- Comment
-' Post -up- Like
 Post -up- Trip
-
-' Comment -up- Like
 
 Address -up- Province
 Address -up- District
