@@ -157,6 +157,7 @@ class CheckIn {
 }
 
 class FavouritePlace {
+    - id: Long
     - placeId: Long
     - userId: Long
 }
@@ -175,6 +176,7 @@ class Place {
 }
 
 class PlaceDetail {
+    - id: Long
     - placeId: Long
     - description: String
     - checkInPoint: int
@@ -192,7 +194,8 @@ class PlaceDetail {
 }
 
 class Feedback {
-    - placeDetailId: Long
+    - id: Long
+    - placeId: Long
     - user: User
     - rating: float
     - content: String
